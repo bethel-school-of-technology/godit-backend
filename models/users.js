@@ -4,67 +4,45 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
 
-
-  googleId: DataTypes.STRING,
-  FirstName: DataTypes.STRING,
-  LastName: DataTypes.STRING,
-  Email: {
-    type: DataTypes.STRING,
-    unique: true
-  },
-  Username: {
-    type: DataTypes.STRING,
-    unique: true
-  },
-  Password: DataTypes.STRING,
-  createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.DATE
+    username: String,
+    googleId: String
 });
 
-const User = mongoose.model('user', userSchema);
+const Users = mongoose.model('users', userSchema);
 
-module.exports = User;
-
-
+module.exports = Users;
 
 
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var users = sequelize.define(
+    'users',
+    {
+      UserId: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
+      FirstName: DataTypes.STRING,
+      LastName: DataTypes.STRING,
+      Email: {
+        type: DataTypes.STRING,
+        unique: true
+      },
+      Username: {
+        type: DataTypes.STRING,
+        unique: true
+      },
+      Password: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE
+    },
+    {}
+  );
+  users.associate = function(models) {
+    // associations can be defined here
+  };
 
-
-
-
-
-
-
-// 'use strict';
-// module.exports = (sequelize, DataTypes) => {
-//   var users = sequelize.define(
-//     'users',
-//     {
-//       UserId: {
-//         allowNull: false,
-//         autoIncrement: true,
-//         primaryKey: true,
-//         type: DataTypes.INTEGER
-//       },
-//       FirstName: DataTypes.STRING,
-//       LastName: DataTypes.STRING,
-//       Email: {
-//         type: DataTypes.STRING,
-//         unique: true
-//       },
-//       Username: {
-//         type: DataTypes.STRING,
-//         unique: true
-//       },
-//       Password: DataTypes.STRING,
-//       createdAt: DataTypes.DATE,
-//       updatedAt: DataTypes.DATE
-//     },
-//     {}
-//   );
-//   users.associate = function(models) {
-//     // associations can be defined here
-//   };
-
-//   return users;
-// };
+  return users;
+};
