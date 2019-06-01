@@ -14,9 +14,8 @@ const validateLoginInput = require('../validation/login');
 // Load User model
 const User = require('../models/users');
 
-// @route POST api/users/register
-// @desc Register user
-// @access Public
+// register
+
 router.post("/register", (req, res) => {
   // Form validation
 const { errors, isValid } = validateRegisterInput(req.body);
@@ -48,9 +47,8 @@ User.findOne({ email: req.body.email }).then(user => {
   });
 });
 
-// @route POST api/users/login
-// @desc Login user and return JWT token
-// @access Public
+// login
+
 router.post("/login", (req, res) => {
   // Form validation
 const { errors, isValid } = validateLoginInput(req.body);
@@ -107,53 +105,3 @@ module.exports = router;
 
 
 
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-// router.get('/signup', function(req, res, next) {
-//   res.render('signup');
-// });
-
-// router.post('/signup', function(req, res, next) {
-//   models.users
-//     .findOrCreate({
-//       where: {
-//         FirstName: req.body.firstName,
-//         LastName: req.body.lastName,
-//         Email: req.body.email,
-//         Username: req.body.username,
-//         Password: req.body.password
-//       }
-//     })
-//     .spread(function(result, created) {
-//       if (created) {
-//         res.redirect('profile/' + result.UserId);
-//       } else {
-//         res.send('this user already exists');
-//       }
-//     });
-// });
-
-
-// router.get('/login', function(req, res, next) {
-//   res.render('login');
-// });
-
-
-// router.post('/login', passport.authenticate('local', {
-//   failureRedirect: '/users/login'
-// }),
-// function (req, res, next) {
-//   res.redirect('profile/' + req.user.UserId);
-// }
-// );
-
-// router.get('/logout', function(req, res) {
-//   req.logout();
-//   res.redirect('/users/login');
-// });
-
-
-
-// module.exports = router;

@@ -1,10 +1,5 @@
-// const mongoose = require('mongoose');
-// const Joi = require('joi');
-//  const Schema = mongoose.Schema;
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 // Create Schema
 const UserSchema = new Schema({
   name: {
@@ -24,42 +19,11 @@ const UserSchema = new Schema({
     default: Date.now
   }
 });
-module.exports = User = mongoose.model("users", UserSchema);    
-   
-// const Users = mongoose.model("Users", usersSchema);
-// function validateUsers(users) {
-//     const schema = {
-//         FirstName : Joi.string()
-//         .min()
-//         .max()
-//         .require(),
-        
-//         LastName: Joi.string()
-//         .min()
-//         .max()
-//         .require(),
-
-//         Email : Joi.string()
-//         .min()
-//         .max()
-//         .require()
-//         .email(),
-
-//         Username : Joi.string()
-//         .min()
-//       .max()
-//       .required(),
-
-//       Password : Joi.string()
-//       .min()
-//       .max()
-//       .required()
-//     };
-    
-//     return Joi.validate(users, schema);
-
-// }
+module.exports = User = mongoose.model("users", UserSchema);
 
 
-// exports.Users = Users;
-// exports.validate = validateUsers;
+
+
+
+
+
