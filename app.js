@@ -19,15 +19,29 @@ require('./config/passport.js');
 var app = express();
 
 
+
+
 //DB connection
-mongoose.connect('mongodb://godit:teammayo1@ds349455.mlab.com:49455/godit', { 
-  useNewUrlParser: true });
+// mongoose.connect('mongodb://godit:teammayo1@ds349455.mlab.com:49455/godit', { 
+//   useNewUrlParser: true });
+// var mongoDB = 'mongodb://godit:teammayo1@ds349455.mlab.com:49455/godit';
+// mongoose.connect(mongoDB, { useNewUrlParser: true });
 
-
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// Bodyparser middleware
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -40,8 +54,8 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.use('routes', users);
@@ -51,11 +65,26 @@ app.use(require('express-session')({
 }));
 
 app.use(passport.initialize());
-app.use(passport.session());
+
+// Passport config
+require("./config/passport")(passport);
+
+// app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// DB Config
+const db = require("./config/keys").mongoURI;
+
+// Connect to MongoDB
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
 
 app.get('/', (req, res) => {
   res.render('home');
