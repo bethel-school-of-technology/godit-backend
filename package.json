@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node app.js",
     "server": "nodemon app.js"
   },
   "dependencies": {
@@ -35,5 +35,13 @@
   "main": "app.js",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bethel-school-of-technology/godit-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bethel-school-of-technology/godit-backend/issues"
+  },
+  "homepage": "https://github.com/bethel-school-of-technology/godit-backend#readme"
 }

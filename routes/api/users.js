@@ -1,24 +1,27 @@
-var express = require('express');
-var router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../config/keys');
-// var models = require('../models');
-const passport = require('passport');
-// const connectEnsure = require('connect-ensure-login');
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
+
 
 // Load input validation
-const validateRegisterInput = require('../validation/register');
-const validateLoginInput = require('../validation/login');
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
+
 
 // Load User model
-const User = require('../models/users');
+const User = require("../../models/User");
 
-// register
 
+//register
 router.post("/register", (req, res) => {
+  
+  
   // Form validation
 const { errors, isValid } = validateRegisterInput(req.body);
+
+
 // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -47,8 +50,7 @@ User.findOne({ email: req.body.email }).then(user => {
   });
 });
 
-// login
-
+//login
 router.post("/login", (req, res) => {
   // Form validation
 const { errors, isValid } = validateLoginInput(req.body);
@@ -97,11 +99,3 @@ const email = req.body.email;
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-
