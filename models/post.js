@@ -27,7 +27,14 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updated: Date
+    updated: Date,
+    comments: [
+        {
+            text: String,
+            created: { type: Date, default: Date.now },
+            postedBy: { type: ObjectId, ref: "User"}
+        }
+    ]
      
 
 
